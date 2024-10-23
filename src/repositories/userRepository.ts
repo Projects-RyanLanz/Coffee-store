@@ -18,6 +18,18 @@ export class UserRepository {
         })
     }
 
+    static async getLogin(email:string,password:string){
+        return await prisma.user.findUnique({
+            where:{
+                email:email,
+                password:password
+            },
+            select: {
+                privilege:true
+            }
+        })
+    }
+
     //POST
     static async create(data:Omit<userModel,'id'>): Promise<userModel>{
         const newUser = await prisma.user.create({

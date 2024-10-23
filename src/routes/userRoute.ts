@@ -1,10 +1,15 @@
 import { Router } from "express";
 import { UserController } from "../controller/userController";
+import authMiddleware from "../middlewares/authMiddlewares";
+import { login } from "../controller/authController";
 
 const userRouter = Router()
 
+userRouter.post('/login', login)
+
 //GET
-userRouter.get('/', UserController.getAllUser)
+userRouter.get('/',authMiddleware, UserController.getAllUser)
+userRouter.get('/a', UserController.getUserPrivilege)
 userRouter.get('/:id', UserController.getUserId)
 
 //POST

@@ -26,6 +26,17 @@ export class UserController{
         }
     }
 
+    static async getUserPrivilege(req:Request,res:Response){
+        const {email,password} = req.body
+
+        try{
+            const user:Pick<userModel,'privilege'> | null = await UserRepository.getLogin(email,password)
+            return user;
+        }catch(e){
+            res.status(500).json(e)
+        }
+
+    }
     //POST
     static async createUser(req:Request,res:Response){
         const data = req.body
