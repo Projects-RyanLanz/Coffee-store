@@ -1,85 +1,86 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, RouterView } from 'vue-router' 
+import Product from './components/Product.vue';
+
+import "./assets/output.css"
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <header>  
+    <div class="mx-auto w-full px-4 py-3 flex justify-center   items-center bg-black">
+      <div class="text-white font-bold align-middle  text-[30px] tracking-widest">
+        Coffee Store 
+      </div>
     </div>
-  </header>
+  </header> 
 
-  <RouterView />
+  <body class="p-10 bg-gray-50">
+    <div class="grid grid-cols-4 gap-10">
+      <Product 
+        v-for="product in products" 
+        :key="product.id"
+        :product="product"
+      />
+      <div class="flex justify-center items-center "> <!-- ou use a altura desejada -->
+        <button type="button" class="bg-blue-500 w-24 h-24 rounded border border-black overflow-hidden shadow-lg transition-transform duration-300 transform hover:scale-105 flex items-center justify-center">
+          <img src="./assets/plus-symbol-button.svg" alt="" class="w-12 h-12 text-white">
+        </button>
+
+      </div>
+    </div>
+    <button id="openModal" class="px-4 py-2 text-white bg-blue-500 rounded">Abrir Modal</button>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg p-6 w-4/5">
+        <h2 class="text-xl font-bold mb-4">Título do Modal</h2>
+        <p class="mb-4">Este é um exemplo de modal usando Tailwind CSS.</p>
+        <div class="flex justify-end">
+            <button id="closeModal" class="px-4 py-2 text-white bg-red-500 rounded">Fechar</button>
+        </div>
+    </div>
+</div>
+  </body> 
 </template>
+ 
+<script>
+import axios from 'axios';
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modal');
+    const openModalButton = document.getElementById('openModal');
+    const closeModalButton = document.getElementById('closeModal');
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+    openModalButton.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+    closeModalButton.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+});
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+export default {
+  components: {
+    Product,
+  },
+  data() {
+    return {
+      products: [],
+    };
+  },
+  mounted() {
+    this.fetchProducts();
+  },
+  methods: {
+    async fetchProducts() {
+      try {
+        const response = await axios.get('http://localhost:3000/product');
+        this.products = response.data;
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
+    },
+  },
+};
+</script>
