@@ -23,24 +23,55 @@ import "./assets/output.css"
         :product="product"
       />
       <div class="flex justify-center items-center "> <!-- ou use a altura desejada -->
-        <button type="button" class="bg-blue-500 w-24 h-24 rounded border border-black overflow-hidden shadow-lg transition-transform duration-300 transform hover:scale-105 flex items-center justify-center">
+        <button id="openModal" type="button" class="bg-blue-500 w-24 h-24 rounded border border-black overflow-hidden shadow-lg transition-transform duration-300 transform hover:scale-105 flex items-center justify-center">
           <img src="./assets/plus-symbol-button.svg" alt="" class="w-12 h-12 text-white">
         </button>
 
       </div>
     </div>
-    <button id="openModal" class="px-4 py-2 text-white bg-blue-500 rounded">Abrir Modal</button>
+ 
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white rounded-lg p-6 w-3/5 h-4/5 flex flex-col">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between pb-4 md:pb-5 border-b rounded-t dark:border-gray-600">
+              <h3 class="text-xl font-semibold text-gray-900 ">
+                  Terms of Service
+              </h3>
+              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+          </div>
+          <!-- Modal Body -->
+          <div class="p-4 md:p-5 space-y-4"> 
+            <form>
+              <div class="grid gap-6 mb-6 grid-cols-6">
+                <div class="col-span-5">
+                  <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 ">Default input</label>
+                  <input maxlength="255" type="text" id="default-input" class=" w-full  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 ">
+                </div> 
+                <div class="col-span-1"> 
+                  <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Default input</label>
+                  <input type="number" id="price" class=" w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ">
+                </div>
+                <div class="col-span-6 h-48">  
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
+                  <textarea id="message" maxlength="255" class="h-full resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500   " placeholder="Write your thoughts here..."></textarea>
+                </div>
+            </div>
+             </form>
 
-<!-- Modal -->
-<div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white rounded-lg p-6 w-4/5">
-        <h2 class="text-xl font-bold mb-4">Título do Modal</h2>
-        <p class="mb-4">Este é um exemplo de modal usando Tailwind CSS.</p>
-        <div class="flex justify-end">
-            <button id="closeModal" class="px-4 py-2 text-white bg-red-500 rounded">Fechar</button>
+          </div>
+          <!-- Modal Footer -->
+          <div class="flex items-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+             <button id="closeModal" class="px-4 py-2 text-white bg-green-500 rounded">Criar</button>
+          </div>
         </div>
-    </div>
-</div>
+  </div>
+
   </body> 
 </template>
  
