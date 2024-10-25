@@ -25,7 +25,17 @@ export class ProductRepository {
         return newProduct as ProductModel; 
     }
 
-    //POST
+    //DELETE
+    static async delete(id:number): Promise<ProductModel> {
+        const deleteProduct = await prisma.product.delete({
+            where: {
+                id:id
+            } 
+        });
+        return deleteProduct as ProductModel; 
+    }
+
+    //PUT
     static async edit(id:number,data: Omit<ProductModel, 'id'>): Promise<ProductModel> {
         const updateProduct = await prisma.product.update({
             where: {id},

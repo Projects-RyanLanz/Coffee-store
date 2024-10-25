@@ -38,6 +38,18 @@ export class productController{
         }
     }
 
+    //DELETE
+    static async deleteProduct(req:Request,res:Response) { 
+        const id: number = Number(req.params.id)
+
+        try{
+            const prod = await ProductRepository.delete(id)
+            res.status(204).send();
+        }catch(e){
+            res.json(e)
+        }
+    }
+
     //UPDATE
     static async updateProduct(req:Request,res:Response) {
         const data: Omit<ProductModel, 'id'> = req.body

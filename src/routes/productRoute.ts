@@ -11,6 +11,9 @@ productRouter.get('/:id', controller.getProductId)
 //POST
 productRouter.post('/', controller.createProduct)
 
+//DELETE
+productRouter.delete('/:id', controller.deleteProduct)
+
 //UPDATE
 productRouter.put('/:id', controller.updateProduct)
 
