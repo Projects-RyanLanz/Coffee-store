@@ -46,7 +46,7 @@ import "./assets/output.css"
                   <span class="sr-only">Close modal</span>
               </button>
           </div>
-          <!-- Modal Body -->
+          <!-- Modal Body d -->
           <div class="p-4 md:p-5 space-y-4"> 
             <form @submit.prevent="createProduct">
               <div class="grid gap-6 mb-6 grid-cols-6">
