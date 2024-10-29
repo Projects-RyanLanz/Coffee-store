@@ -19,11 +19,17 @@ const router = createRouter({
       path: '/home',
       name: 'Home',
       component: Home,
+      meta: { requiresAuth:true,privilege:getPrivilege() }
     },
   ]  
  
 });
 
+function getPrivilege(){
+  const privilege = localStorage.getItem('privilege');
+
+  return privilege;
+}
  
 
 // Proteger rotas

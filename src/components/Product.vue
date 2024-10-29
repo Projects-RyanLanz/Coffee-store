@@ -1,17 +1,10 @@
-
-
-
-
-
-
-
 <template> 
 
     <div :id="`${product.id}`" class="bg-white px-6 max-w-sm min-h-48 max-h-48 rounded border border-black overflow-hidden shadow-lg transition-transform duration-300 transform hover:scale-105">
         <div class=" py-4 ">
             <div class="grid grid-cols-8 font-bold text-xl mb-2">
                 <div class="col-span-7">{{ product.name }}</div> 
-                <button @click="deleteProduct(product.id)" class="col-span-1 text-white bg-red-700 border border-black rounded-md transition-transform duration-300 transform hover:scale-105">X</button> 
+                <button v-if="admin" @click="deleteProduct(product.id)" class="col-span-1 text-white bg-red-700 border border-black rounded-md transition-transform duration-300 transform hover:scale-105">X</button> 
             </div>
             <p class="text-gray-700 text-base">{{ truncatedDescription }}</p>
         </div>
@@ -29,6 +22,10 @@ export default {
   props: {
     product: {
       type: Object,
+      required: true,
+    },
+    admin: {
+      type: Boolean,
       required: true,
     },
   },

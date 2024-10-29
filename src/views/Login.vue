@@ -38,6 +38,7 @@ export default {
         }
     },
     mounted(){
+        
         this.isAuthenticated()
     },
     methods: {
@@ -46,12 +47,13 @@ export default {
                 await axios.post('http://localhost:3000/user/login', this.user)
                     .then(res => {
                         const token = res.data.token;
+                        const privilege = res.data.user.privilege;
                         localStorage.setItem('token', token);
+                        localStorage.setItem('privilege', privilege);
                         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                         if (res.status === 200) {
                             // Redirecionar para outra página após login
-                            this.$router.push({ name: 'Home' });
-                            console.log(res.data)
+                            this.$router.push({ name: 'Home' }); 
                         }
                     })
                     .catch(error => {
