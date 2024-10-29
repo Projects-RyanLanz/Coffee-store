@@ -6,8 +6,8 @@ const controller = productController
 const productRouter = Router()
 
 //GET
-productRouter.get('/', authMiddleware, controller.getAllProduct)
-productRouter.get('/:id', authMiddleware, controller.getProductId)
+productRouter.get('/', controller.getAllProduct)
+productRouter.get('/:id', controller.getProductId)
 
 //POST
 productRouter.post('/', authMiddleware, controller.createProduct)

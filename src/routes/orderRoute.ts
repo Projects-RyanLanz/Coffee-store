@@ -13,7 +13,7 @@ orderRoute.post('/', orderController.createOrder)
 //DELETE
 orderRoute.delete('/:id', orderController.deleteOrder)
 
-//DELETE
+//EDIT
 orderRoute.put('/:id', orderController.editOrder)
 
 export default orderRoute

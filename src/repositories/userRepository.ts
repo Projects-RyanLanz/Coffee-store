@@ -18,10 +18,11 @@ export class UserRepository {
         })
     }
 
-    static async getLogin(email:string){
+    static async getLogin(email:string,password:string){
         return await prisma.user.findUnique({
             where:{
                 email:email, 
+                password:password, 
             },
         })
     }

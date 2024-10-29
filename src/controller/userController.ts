@@ -33,7 +33,7 @@ export class UserController{
         const {email,password} = req.body
 
         try{
-            const user:userModel | null = await UserRepository.getLogin(email)
+            const user:userModel | null = await UserRepository.getLogin(email,password)
             if (!user) {
                 return res.status(401).json({ message: 'Credenciais invalidas!' });
             }   
@@ -46,7 +46,7 @@ export class UserController{
                 expiresIn: '1h'
             })
 
-            res.status(200).json({token});
+            res.status(200).json({token, user});
         }catch(e){
             res.status(500).json(e)
         }

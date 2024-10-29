@@ -9,16 +9,16 @@ const userRouter = Router()
  
 //GET
 userRouter.get('/', authMiddleware, UserController.getAllUser)
-userRouter.get('/:id', UserController.getUserId)
+userRouter.get('/:id', authMiddleware, UserController.getUserId)
 
 //POST
-userRouter.post('/', UserController.createUser)
+userRouter.post('/', authMiddleware, UserController.createUser)
 userRouter.post('/login', UserController.getUserPrivilege)
 
 //DELETE
-userRouter.delete('/:id', UserController.deleteUser)
+userRouter.delete('/:id', authMiddleware, UserController.deleteUser)
 
 //PUT
-userRouter.put('/:id', UserController.editUser)
+userRouter.put('/:id', authMiddleware, UserController.editUser)
 
 export default userRouter;
