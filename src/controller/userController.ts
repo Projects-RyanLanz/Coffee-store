@@ -3,6 +3,9 @@ import { Request, Response } from "express";
 import { userModel } from "../models/userModel";
 import jwt from "jsonwebtoken";
 
+const SECRET_KEY = process.env.API_KEY || '1234'; // Use uma chave secreta
+
+
 export class UserController{
 
     //GET
@@ -30,8 +33,20 @@ export class UserController{
         const {email,password} = req.body
 
         try{
-            const user:Pick<userModel,'privilege'> | null = await UserRepository.getLogin(email,password)
-            return user;
+            const user:userModel | null = await UserRepository.getLogin(email)
+            if (!user) {
+                return res.status(401).json({ message: 'Credenciais invalidas!' });
+            }   
+ 
+            if (password != user.password){
+                return res.status(401).json({ message: 'Credenciais invaldias!' });
+            }
+
+            const token = jwt.sign({ email:user.email,password:user.password }, SECRET_KEY,{
+                expiresIn: '1h'
+            })
+
+            res.status(200).json({token});
         }catch(e){
             res.status(500).json(e)
         }
