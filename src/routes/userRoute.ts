@@ -10,6 +10,8 @@ const userRouter = Router()
 //GET
 userRouter.get('/', authMiddleware, UserController.getAllUser)
 userRouter.get('/:id', authMiddleware, UserController.getUserId)
+userRouter.get('/:id/order', authMiddleware, UserController.getUserOders)
+//userRouter.get('/login', UserController.getUserPrivilege)
 
 //POST
 userRouter.post('/', authMiddleware, UserController.createUser)

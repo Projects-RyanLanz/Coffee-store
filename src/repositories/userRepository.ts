@@ -27,6 +27,17 @@ export class UserRepository {
         })
     }
 
+    static async getUserOrders(id:number){
+        return await prisma.user.findUniqueOrThrow({
+            where:{
+                id:id
+            },
+            include:{
+                order:true
+            }
+        })
+    }
+
     //POST
     static async create(data:Omit<userModel,'id'>): Promise<userModel>{
         const newUser = await prisma.user.create({

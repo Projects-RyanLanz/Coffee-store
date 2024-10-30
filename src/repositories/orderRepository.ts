@@ -8,7 +8,11 @@ export class orderRepository{
 
     //GET
     static async  getAll(){
-        return await prisma.order.findMany()
+        return await prisma.order.findMany({ 
+            include:{
+                user:true
+            }
+        })
     }
 
     static async getid(id:number){

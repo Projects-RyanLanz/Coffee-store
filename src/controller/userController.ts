@@ -29,6 +29,17 @@ export class UserController{
         }
     }
 
+    static async getUserOders(req:Request,res:Response){
+        const id = Number(req.params.id);
+
+        try{
+            const user = await UserRepository.getUserOrders(id)
+            res.json(user)
+        }catch(e){
+            res.status(500).json(e)
+        }
+    }
+
     static async getUserPrivilege(req:Request,res:Response){
         const {email,password} = req.body
 
@@ -49,8 +60,7 @@ export class UserController{
             res.status(200).json({token, user});
         }catch(e){
             res.status(500).json(e)
-        }
-
+        } 
     }
     //POST
     static async createUser(req:Request,res:Response){
